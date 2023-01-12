@@ -1,13 +1,348 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;600&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --total-dark-green: rgb(5, 25, 0);
+  --darker-green: rgb(16, 76, 0);
+  --dark-green: rgb(27, 127, 0.7);
+  --green: rgb(38, 178, 1);
+  --lighter-green: rgb(48, 229, 1);
+  --light-green: rgb(74, 254, 26);
+  --red: rgba(201, 4, 2, 0.6);
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  min-height: 100vh;
+  background: url('./images/dark-lightball.jpg') no-repeat center/cover fixed;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Navbar styling */
+
+nav {
+  height: 50px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, var(--red), var(--dark-green));
+}
+nav h1 {
+  color: red;
+}
+.nav-links {
+  display: flex;
+  flex-direction: row;
+}
+.nav-links li {
+  list-style: none;
+}
+.nav-links a {
+  margin-right: 3rem;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+}
+.nav-links a::before {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  bottom: -4px;
+  left: 0;
+}
+.nav-links a:hover::before {
+  opacity: 1;
+  transition: opacity 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.current {
+  color: red !important;
+}
+.nav-logo a {
+  display: flex;
+  align-items: center;
+}
+.nav-logo a svg {
+  color: var(--dark-green);
+}
+.hamburger {
+  display: none;
+}
+.hamburger i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.hamburger i:hover {
+  transform: scale(1.1);
+}
+
+/* Form Styling */
+.home {
+  min-height: calc(100vh - 50px - 32px);
+}
+
+.home-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  width: 300px;
+  height: 40px;
+  position: relative;
+}
+form input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid var(--green);
+  outline: none;
+  font-size: 15px;
+  color: white;
+}
+
+form label {
+  color: var(--green);
+  position: absolute;
+
+  top: 7.5px;
+  left: 20px;
+  font-size: 15px;
+  transition: top 1s;
+  padding: 0 5px;
+  padding-bottom: 0;
+  background-color: black;
+}
+form input:focus ~ label {
+  top: -15px;
+}
+
+/* Card Grids */
+.movies-list {
+  width: 100vw;
+}
+.movies-list {
+  width: 90%;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  grid-gap: 25px;
+  justify-content: space-evenly;
+}
+.card-box {
+  color: black;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px 0px var(--light-green);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-img {
+  height: 225px;
+  overflow: hidden;
+}
+.card-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+  background-attachment: fixed;
+}
+.card-content {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+}
+.card-content p {
+  margin: 15px 0px;
+  font-size: 15px;
+}
+.card-content a {
+  text-decoration: none;
+  font-size: 17px;
+  color: white;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: var(--green);
+}
+.card-content a:hover {
+  background-color: var(--dark-green);
+  transition: 1s ease;
+}
+
+/*Loading*/
+.movies-list .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Single Movie*/
+.single-movie {
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 4px 8px 0px var(--light-green);
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.single-movie-img {
+  margin: 15px;
+}
+.single-movie-img img {
+  width: 200px;
+  height: 300px;
+  object-fit: fill;
+}
+.single-movie-data {
+  width: 200px;
+  width: 300px;
+}
+.single-movie-data h3 {
+  margin-bottom: 1.5rem;
+}
+.single-movie-data h4 {
+  margin-bottom: 1rem;
+}
+.single-movie-data p {
+  margin-bottom: 10px;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.remove {
+  display: none;
+}
+
+/* About */
+.about,
+.error-page {
+  width: 300px;
+  height: 300px;
+  margin-top: 3rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0px 4px 8px 0px var(--light-green);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.about h3 {
+  margin: 1rem 0.5rem;
+  line-height: 2rem;
+}
+.about p {
+  margin-top: 1rem;
+  line-height: 1.8rem;
+  margin-inline: 1rem;
+}
+.about p span {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green);
+}
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-page h1 {
+  margin-bottom: 2rem;
+}
+.error-page a {
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--light-green);
+  width: 12rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+}
+.error-page a:hover {
+  color: var(--light-green);
+  border: 1px solid white;
+  transition: 1s all ease;
+}
+/* medias */
+
+@media screen and (max-width: 540px) {
+  .hamburger {
+    display: block;
+  }
+  nav {
+    justify-content: space-between;
+  }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    background: linear-gradient(45deg, var(--red), var(--dark-green));
+    width: 15rem;
+    height: calc(100vh - 50px);
+    display: none;
+  }
+  .nav-links li:first-of-type {
+    margin-top: 7rem;
+  }
+  .nav-links li {
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+  .block {
+    display: block;
+    transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  form {
+    width: 250px;
+  }
+  .home-form {
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 512px) {
+  .single-movie {
+    flex-direction: column;
+  }
+  .single-movie-img img {
+    width: 300px;
+  }
 }
